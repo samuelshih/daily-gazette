@@ -1,3 +1,9 @@
+# Instructions
+Make all changes on the swat remote.
+When ready to push, `git push origin branch_name`
+Never merge into master, make a pull request first, then discuss with webmasters
+Push into both remotes
+
 # WordPress
 
 This is a WordPress repository configured to run on the [Pantheon platform](https://www.getpantheon.com).
