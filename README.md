@@ -1,10 +1,12 @@
 # Instructions
-Make all changes on the swat remote.
-When ready to push, `git push origin branch_name`
-Never merge into master, make a pull request first, then discuss with webmasters
-Push into both remotes
 
 # WordPress
+Workflow 
+- Everytime you change something on pantheon’s web interface, it will change the pantheon repo
+- git pull from pantheon’s repo into your local. 
+- Then push from pantheon’s repo to the dg-dev repo in github.swarthmore.edu with git push swat
+- `git push swat` : push to swat repo
+- TO ADD: `git remote add swat git@github.swarthmore.edu:sshih1/daily-gazette-dev.git`
 
 This is a WordPress repository configured to run on the [Pantheon platform](https://www.getpantheon.com).
 
