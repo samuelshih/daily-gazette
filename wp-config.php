@@ -43,6 +43,9 @@ else:
     /** The Database Collate type. Don't change this if in doubt. */
     define('DB_COLLATE', '');
 
+    /** Permissions to wp-content so web server has write permissions 11/23/2015 */
+    define('FS_METHOD', 'direct');    
+
     /**#@+
      * Authentication Unique Keys and Salts.
      *
