@@ -9,8 +9,8 @@ class SendoutBuilder{
 
     // ==== Static Stuff  ====
 
-    public static $staticUrl = "http://http://dev-daily-gazette.pantheon.io/wp-content/themes/colormag/sendout_static/";
-    public static $rootUrl = "http://http://dev-daily-gazette.pantheon.io/";
+    public static $staticUrl = "http://http://live-daily-gazette.pantheon.io/wp-content/themes/colormag/sendout_static/";
+    public static $rootUrl = "http://http://live-daily-gazette.pantheon.io/";
 
     /* Returns a full url path for static images (e.g. the header) */
     public static function get_static_content($filename){
