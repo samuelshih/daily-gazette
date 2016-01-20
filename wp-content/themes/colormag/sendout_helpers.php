@@ -12,6 +12,7 @@ class SendoutBuilder{
     public static $staticUrl = "http://dev-daily-gazette.pantheon.io/wp-content/themes/colormag/sendout_static/";
     public static $rootUrl = "http://dev-daily-gazette.pantheon.io/";
 
+
     /* Returns a full url path for static images (e.g. the header) */
     public static function get_static_content($filename){
         return self::$staticUrl.$filename;
