@@ -1,5 +1,6 @@
 <?php
 /**
+ * Template Name: archive
  * The template for displaying Archive page.
  *
  * @package ThemeGrill
