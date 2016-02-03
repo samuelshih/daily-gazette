@@ -66,7 +66,7 @@ if (have_posts()){
 while ($query->have_posts()) {
     $query->the_post();
 	/* Check: last 24hrs? */
-	if (time() - get_the_time('U') <= 112800/*86400*/) {
+	if (time() - get_the_time('U') <= 86400) {
         $l = get_permalink();
         $t = SendoutBuilder::string_max(get_the_title(), 85);
 
