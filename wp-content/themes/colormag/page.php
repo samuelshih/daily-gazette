@@ -11,6 +11,8 @@
 <?php get_header(); ?>
 
 	<?php do_action( 'colormag_before_body_content' ); ?>
+	<?php if ( function_exists('yoast_breadcrumb') ) {
+		yoast_breadcrumb('<p id="breadcrumbs">','</p>'); } ?>
 
 	<div id="primary">
 		<div id="content" class="clearfix">
