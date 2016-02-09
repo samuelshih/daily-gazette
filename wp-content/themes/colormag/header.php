@@ -149,6 +149,6 @@ wp_head();
 	<?php do_action( 'colormag_after_header' ); ?>
 	<?php do_action( 'colormag_before_main' ); ?>
 	<?php if ( function_exists('yoast_breadcrumb') )
-	{yoast_breadcrumb('<p id="breadcrumbs">','</p>');} ?>
+	{yoast_breadcrumb('<p id="breadcrumbs" style="padding:10px 3%">','</p>');} ?>
 	<div id="main" class="clearfix">
 		<div class="inner-wrap clearfix">

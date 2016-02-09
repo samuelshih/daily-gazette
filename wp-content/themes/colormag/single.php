@@ -9,8 +9,6 @@
 ?>
 
 <?php get_header(); ?>
-	<?php if ( function_exists('yoast_breadcrumb') )
-	{yoast_breadcrumb('<p id="breadcrumbs">','</p>');} ?>
 
 	<?php do_action( 'colormag_before_body_content' ); ?>
 
