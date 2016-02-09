@@ -144,11 +144,11 @@ wp_head();
 		</div><!-- #header-text-nav-container -->
 
 		<?php if( get_theme_mod( 'colormag_header_image_position', 'position_two' ) == 'position_three' ) { colormag_render_header_image(); } ?>
-		<?php if ( function_exists('yoast_breadcrumb') )
-		{yoast_breadcrumb('<p id="breadcrumbs">','</p>');} ?>
 
 	</header>
 	<?php do_action( 'colormag_after_header' ); ?>
 	<?php do_action( 'colormag_before_main' ); ?>
+	<?php if ( function_exists('yoast_breadcrumb') )
+	{yoast_breadcrumb('<p id="breadcrumbs">','</p>');} ?>
 	<div id="main" class="clearfix">
 		<div class="inner-wrap clearfix">
