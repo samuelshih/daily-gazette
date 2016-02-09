@@ -24,9 +24,9 @@
 		</div><!-- #content -->
 
       <?php get_template_part( 'navigation', 'single' ); ?>
-			<?php if (function_exists ( 'coauthors_posts_links' ) ): ?> //added by Keton for coauthors
-				<?php coauthors_posts_links();?> //see above
-      <?php elseif ( get_the_author_meta( 'description' ) ) : ?> //"if" edited to "elseif" by Keton for coauthors
+			<?php if (function_exists ( 'coauthors_posts_links' ) ): ?>
+				<?php coauthors_posts_links();?>
+      <?php elseif ( get_the_author_meta( 'description' ) ) : ?> 
          <div class="author-box">
             <div class="author-img"><?php echo get_avatar( get_the_author_meta( 'user_email' ), '100' ); ?></div>
                <h4 class="author-name"><?php the_author_meta( 'display_name' ); ?></h4>
