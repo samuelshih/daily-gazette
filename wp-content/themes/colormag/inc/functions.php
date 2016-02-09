@@ -255,7 +255,7 @@ function colormag_entry_meta() {
    		$time_string
    	); ?>
     <?php if (function_exists ( 'coauthors_posts_links' ) ): ?>
-      <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="<?php echo esc_url( coauthors_posts_links( get_the_author_meta( 'ID' ) ) ); ?>"</a></span></span>
+      <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="<?php echo esc_url( coauthors_posts_links( get_the_author_meta( 'ID' ) ) ); ?></a></span></span>
     <?php else : ?>
       <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" title="<?php echo get_the_author(); ?>"><?php echo esc_html( get_the_author() ); ?></a></span></span>
     <?php endif; ?>
