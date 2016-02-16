@@ -1,5 +1,4 @@
 <?php
-
 function get_coauthors( $post_id = 0 ) {
 	global $post, $post_ID, $coauthors_plus, $wpdb;
 
@@ -33,7 +32,6 @@ function get_coauthors( $post_id = 0 ) {
 	}
 	return $coauthors;
 }
-
 /**
  * Checks to see if the the specified user is author of the current global post or post (if specified)
  * @param object|int $user
@@ -46,7 +44,6 @@ function is_coauthor_for_post( $user, $post_id = 0 ) {
 		$post_id = $post->ID;
 	if( ! $post_id )
 		return false;
-
 	if ( ! $user )
 		return false;
 
@@ -62,7 +59,6 @@ function is_coauthor_for_post( $user, $post_id = 0 ) {
 	}
 	return false;
 }
-
 class CoAuthorsIterator {
 	var $position = -1;
 	var $original_authordata;
@@ -77,7 +73,6 @@ class CoAuthorsIterator {
 			$postID = (int)$post->ID;
 		if( !$postID )
 			trigger_error(__('No post ID provided for CoAuthorsIterator constructor. Are you not in a loop or is $post not set?', 'co-authors-plus')); //return null;
-
 		$this->original_authordata = $this->current_author = $authordata;
 		$this->authordata_array = get_coauthors( $postID );
 
@@ -122,17 +117,14 @@ class CoAuthorsIterator {
 		return $this->authordata_array;
 	}
 }
-
 //Helper function for the following new template tags
 function coauthors__echo( $tag, $type = 'tag', $separators = array(), $tag_args = null, $echo = true ) {
-
 	// Define the standard output separator. Constant support is for backwards compat.
 	// @see https://github.com/danielbachhuber/Co-Authors-Plus/issues/12
 	$default_before = ( defined( 'COAUTHORS_DEFAULT_BEFORE' ) ) ? COAUTHORS_DEFAULT_BEFORE : '';
 	$default_between = ( defined( 'COAUTHORS_DEFAULT_BETWEEN' ) ) ? COAUTHORS_DEFAULT_BETWEEN : ', ';
-	$default_between_last = ( defined( 'COAUTHORS_DEFAULT_BETWEEN_LAST' ) ) ? COAUTHORS_DEFAULT_BETWEEN_LAST :  __( '  ', 'co-authors-plus' );
+	$default_between_last = ( defined( 'COAUTHORS_DEFAULT_BETWEEN_LAST' ) ) ? COAUTHORS_DEFAULT_BETWEEN_LAST :  __( ' and ', 'co-authors-plus' );
 	$default_after = ( defined( 'COAUTHORS_DEFAULT_AFTER' ) ) ? COAUTHORS_DEFAULT_AFTER : '';
-
 	if( ! isset( $separators['before'] ) || $separators['before'] === NULL )
 		$separators['before'] = apply_filters( 'coauthors_default_before', $default_before );
 	if( ! isset( $separators['between'] ) || $separators['between'] === NULL )
@@ -141,7 +133,6 @@ function coauthors__echo( $tag, $type = 'tag', $separators = array(), $tag_args 
 		$separators['betweenLast'] = apply_filters( 'coauthors_default_between_last', $default_between_last );
 	if( ! isset( $separators['after'] ) || $separators['after'] === NULL )
 		$separators['after'] = apply_filters( 'coauthors_default_after', $default_after );
-
 	$output = '';
 
 	$i = new CoAuthorsIterator();
@@ -180,7 +171,6 @@ function coauthors__echo( $tag, $type = 'tag', $separators = array(), $tag_args 
 
 	return $output;
 }
-
 /**
  * Outputs the co-authors display names, without links to their posts.
  * Co-Authors Plus equivalent of the_author() template tag.
@@ -199,7 +189,6 @@ function coauthors( $between = null, $betweenLast = null, $before = null, $after
 		'after' => $after
 	), null, $echo );
 }
-
 /**
  * Outputs the co-authors display names, with links to their posts.
  * Co-Authors Plus equivalent of the_author_posts_link() template tag.
@@ -218,7 +207,6 @@ function coauthors_posts_links( $between = null, $betweenLast = null, $before = 
 		'after' => $after
 	), null, $echo );
 }
-
 /**
  * Outputs a single co-author linked to their post archive.
  *
@@ -246,7 +234,6 @@ function coauthors_posts_links_single( $author ) {
 	);
 	return $args['before_html'] . $single_link . $args['after_html'];
 }
-
 /**
  * Outputs the co-authors first names, without links to their posts.
  *
@@ -264,7 +251,6 @@ function coauthors_firstnames($between = null, $betweenLast = null, $before = nu
 		'after' => $after
 	), 'first_name', $echo );
 }
-
 /**
  * Outputs the co-authors last names, without links to their posts.
  *
@@ -282,7 +268,6 @@ function coauthors_lastnames($between = null, $betweenLast = null, $before = nul
 		'after' => $after
 	), 'last_name', $echo );
 }
-
 /**
  * Outputs the co-authors nicknames, without links to their posts.
  *
@@ -300,7 +285,6 @@ function coauthors_nicknames($between = null, $betweenLast = null, $before = nul
 		'after' => $after
 	), 'nickname', $echo );
 }
-
 /**
  * Outputs the co-authors display names, with links to their websites if they've provided them.
  *
@@ -318,7 +302,6 @@ function coauthors_links($between = null, $betweenLast = null, $before = null, $
 		'after' => $after
 	), null, $echo );
 }
-
 /**
  * Outputs the co-authors email addresses
  *
@@ -336,7 +319,6 @@ function coauthors_emails($between = null, $betweenLast = null, $before = null, 
 		'after' => $after
 	), 'user_email', $echo );
 }
-
 /**
  * Outputs a single co-author, linked to their website if they've provided one.
  *
@@ -354,7 +336,6 @@ function coauthors_links_single( $author ) {
 		return get_the_author();
 	}
 }
-
 /**
  * Outputs the co-authors IDs
  *
@@ -372,7 +353,6 @@ function coauthors_IDs($between = null, $betweenLast = null, $before = null, $af
 		'after' => $after
 	), null, $echo );
 }
-
 function get_the_coauthor_meta( $field ) {
 	global $wp_query, $post;
 
@@ -385,12 +365,10 @@ function get_the_coauthor_meta( $field ) {
 	}
 	return $meta;
 }
-
 function the_coauthor_meta( $field, $user_id = 0 ) {
 	// TODO: need before after options
 	echo get_the_coauthor_meta($field, $user_id);
 }
-
 /**
  * List all the *co-authors* of the blog, with several options available.
  * optioncount (boolean) (false): Show the count in parenthesis next to the author's name.
@@ -404,7 +382,6 @@ function the_coauthor_meta( $field, $user_id = 0 ) {
  */
 function coauthors_wp_list_authors( $args = array() ) {
 	global $coauthors_plus;
-
 	$defaults = array(
 		'optioncount'      => false,
 		'show_fullname'    => false,
@@ -417,10 +394,8 @@ function coauthors_wp_list_authors( $args = array() ) {
 		'html'             => true,
 		'number'           => 20, // A sane limit to start to avoid breaking all the things
 	);
-
 	$args = wp_parse_args( $args, $defaults );
 	$return = '';
-
 	$term_args = array(
 			'orderby'      => 'name',
 			'hide_empty'   => 0,
@@ -432,33 +407,25 @@ function coauthors_wp_list_authors( $args = array() ) {
 		// Something's wrong in the state of Denmark
 		if ( false === ( $coauthor = $coauthors_plus->get_coauthor_by( 'user_login', $author_term->name ) ) )
 			continue;
-
 		$authors[$author_term->name] = $coauthor;
 
 		$authors[$author_term->name]->post_count = $author_term->count;
 	}
-
 	foreach ( (array) $authors as $author ) {
-
 		$link = '';
-
 		if ( $args['show_fullname'] && ( $author->first_name && $author->last_name ) )
 			$name = "$author->first_name $author->last_name";
 		else
 			$name = $author->display_name;
-
-
 		if ( ! $args['html'] ) {
 			if ( $author->post_count == 0 ) {
 				if ( ! $args['hide_empty'] )
 					$return .= $name . ', ';
 			} else
 				$return .= $name . ', ';
-
 			// No need to go further to process HTML.
 			continue;
 		}
-
 		if ( ! ( $author->post_count == 0 && $args['hide_empty'] ) && 'list' == $args['style'] )
 			$return .= '<li>';
 		if ( $author->post_count == 0 ) {
@@ -466,51 +433,39 @@ function coauthors_wp_list_authors( $args = array() ) {
 				$link = $name;
 		} else {
 			$link = '<a href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf( __("Posts by %s", 'co-authors-plus' ), $name ) ) . '">' . esc_html( $name ) . '</a>';
-
 			if ( (! empty( $args['feed_image'] ) ) || ( ! empty( $args['feed'] ) ) ) {
 				$link .= ' ';
 				if ( empty( $args['feed_image'] ) )
 					$link .= '(';
 				$link .= '<a href="' . get_author_feed_link( $author->ID ) . '"';
-
 				if ( !empty( $args['feed'] ) ) {
 					$title = ' title="' . esc_attr( $args['feed'] ) . '"';
 					$alt = ' alt="' . esc_attr( $args['feed'] ) . '"';
 					$name = $feed;
 					$link .= $title;
 				}
-
 				$link .= '>';
-
 				if ( ! empty( $args['feed_image'] ) )
 					$link .= "<img src=\"" . esc_url( $args['feed_image'] ) . "\" style=\"border: none;\"$alt$title" . ' />';
 				else
 					$link .= $name;
-
 				$link .= '</a>';
-
 				if ( empty( $args['feed_image'] ) )
 					$link .= ')';
 			}
-
 			if ( $args['optioncount'] )
 				$link .= ' ('. $author->post_count . ')';
-
 		}
-
 		if ( ! ( $author->post_count == 0 && $args['hide_empty'] ) && 'list' == $args['style'] )
 			$return .= $link . '</li>';
 		else if ( ! $args['hide_empty'] )
 			$return .= $link . ', ';
 	}
-
 	$return = trim( $return, ', ' );
-
 	if ( ! $args['echo'] )
 		return $return;
 	echo $return;
 }
-
 /**
  * Retrieve a Co-Author's Avatar.
  *
@@ -526,21 +481,16 @@ function coauthors_wp_list_authors( $args = array() ) {
  */
 function coauthors_get_avatar( $coauthor, $size = 32, $default = '', $alt = false ) {
 	global $coauthors_plus;
-
 	if ( ! is_object( $coauthor ) )
 		return '';
-
 	if ( isset( $coauthor->type ) && 'guest-author' == $coauthor->type ) {
 		$guest_author_thumbnail = $coauthors_plus->guest_authors->get_guest_author_thumbnail( $coauthor, $size );
-
 		if ( $guest_author_thumbnail )
 			return $guest_author_thumbnail;
 	}
-
 	// Make sure we're dealing with an object for which we can retrieve an email
 	if ( isset( $coauthor->user_email ) )
 		return get_avatar( $coauthor->user_email, $size, $default, $alt );
-
 	// Nothing matched, an invalid object was passed.
 	return '';
 }
