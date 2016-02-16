@@ -254,11 +254,7 @@ function colormag_entry_meta() {
    		esc_attr( get_the_time() ),
    		$time_string
    	); ?>
-    <?php if (function_exists ( 'coauthors_posts_links' ) ): ?>
-      <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="<?php echo esc_url( coauthors_posts_links( get_the_author_meta( 'ID' ) ) ); ?></a></span></span>
-    <?php else : ?>
       <span class="byline"><span class="author vcard"><i class="fa fa-user"></i><a class="url fn n" href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>" title="<?php echo get_the_author(); ?>"><?php echo esc_html( get_the_author() ); ?></a></span></span>
-    <?php endif; ?>
       <?php
       if ( ! post_password_required() && comments_open() ) { ?>
          <span class="comments"><?php comments_popup_link( __( '<i class="fa fa-comment"></i> 0 Comment', 'colormag' ), __( '<i class="fa fa-comment"></i> 1 Comment', 'colormag' ), __( '<i class="fa fa-comments"></i> % Comments', 'colormag' ) ); ?></span>
