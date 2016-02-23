@@ -526,7 +526,9 @@ body {
 .header-image {
 	margin-bottom: 0;
 	border-bottom: 1px solid #EAEAEA;
-	width: 100%;
+	width: 70%;
+	padding: 0 15% 0 15%;
+	height: 10em;
 }
 
 /* =HEADER INFO TEXT
