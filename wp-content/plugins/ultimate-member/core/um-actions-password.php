@@ -34,13 +34,16 @@
 	add_action('um_change_password_process_hook','um_change_password_process_hook');
 	function um_change_password_process_hook( $args ) {
 		global $ultimatemember;
+		extract(  $args );
 
 		wp_set_password( $args['user_password'], $args['user_id'] );
 		
 		delete_user_meta( $args['user_id'], 'reset_pass_hash');
 		delete_user_meta( $args['user_id'], 'reset_pass_hash_token');
-		
+		delete_user_meta( $args['user_id'], 'password_rst_attempts');
+
 		do_action('um_after_changing_user_password', $args['user_id'] );
+		
 		
 		if ( is_user_logged_in() ) {
 			wp_logout();
@@ -50,17 +53,31 @@
 		
 	}
 	
+	/**
+	 * Overrides password changed notification
+	 * 
+	 */
+	function um_send_password_change_email( $args ){
+
+		global $ultimatemember;
+
+		um_fetch_user( $user_id );
+		
+		$ultimatemember->user->password_changed();
+
+		um_reset_user();
+
+
+		return false;
+	}
+	
 	/***
 	***	@This is executed after changing password
 	***/
 	add_action('um_after_changing_user_password','um_after_changing_user_password');
 	function um_after_changing_user_password( $user_id ) {
 		global $ultimatemember;
-		um_fetch_user( $user_id );
-		
-		$ultimatemember->mail->send( um_user('user_email'), 'changedpw_email' );
-		
-		um_reset_user();
+
 	}
 	
 	/***
@@ -89,7 +106,19 @@
 		$user = $_POST['username_b'];
 		
 		if ( ( !is_email( $user ) && !username_exists( $user ) ) || ( is_email( $user ) && !email_exists( $user ) ) ) {
-			$ultimatemember->form->add_error('username_b', __(' We can\'t find an account registered with that address or username ','ultimatemember') );
+			$ultimatemember->form->add_error('username_b', __('We can\'t find an account registered with that address or username','ultimatemember') );
+		} else {
+			if ( is_email( $user ) ) {
+				$user_id = email_exists( $user );
+			} else {
+				$user_id = username_exists( $user );
+			}
+			$attempts = (int)get_user_meta( $user_id, 'password_rst_attempts', true );
+			if ( $attempts >= 3 ) {
+				$ultimatemember->form->add_error('username_b', __('You have reached the limit for requesting password change for this user already. Contact support if you cannot open the email','ultimatemember') );
+			} else {
+				update_user_meta( $user_id, 'password_rst_attempts', $attempts + 1 );
+			}
 		}
 		
 	}

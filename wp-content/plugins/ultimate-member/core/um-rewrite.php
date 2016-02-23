@@ -43,18 +43,47 @@ class UM_Rewrite {
 				$user_slug = $user->post_name;
 				$account = get_post($account_page_id);
 				$account_slug = $account->post_name;
+
+				$add_lang_code = '';
+				
+				if ( function_exists('icl_object_id') || function_exists('icl_get_current_language')  ) {
 					
-				add_rewrite_rule(
-						'^'.$user_slug.'/([^/]*)$',
-						'index.php?page_id='.$user_page_id.'&um_user=$matches[1]',
-						'top'
-				);
+					if( function_exists('icl_get_current_language') ){
+						$language_code = icl_get_current_language();
+					}else if( function_exists('icl_object_id') ){
+						$language_code = ICL_LANGUAGE_CODE;
+					}
+
+					// User page translated slug
+					$lang_post_id = icl_object_id( $user->ID, 'post', FALSE, $language_code );
+					$lang_post_obj = get_post( $lang_post_id );
+					if( isset( $lang_post_obj->post_name ) ){
+						$user_slug = $lang_post_obj->post_name;
+					}
 					
-				add_rewrite_rule(
-						'^'.$account_slug.'/([^/]*)$',
-						'index.php?page_id='.$account_page_id.'&um_tab=$matches[1]',
-						'top'
+					// Account page translated slug
+					$lang_post_id = icl_object_id( $account->ID, 'post', FALSE, $language_code );
+					$lang_post_obj = get_post( $lang_post_id );
+					if( isset( $lang_post_obj->post_name ) ){
+						$account_slug = $lang_post_obj->post_name;
+					}
+
+					if(  $language_code != icl_get_default_language() ){
+						$add_lang_code = $language_code;
+					}
+					
+				}
+				
+				add_rewrite_rule( $user_slug.'/([^/]+)/?$',
+									'index.php?page_id='.$user_page_id.'&um_user=$matches[1]&lang='.$add_lang_code,
+									'top'
 				);
+										
+				add_rewrite_rule( $account_slug.'/([^/]+)?$',
+									'index.php?page_id='.$account_page_id.'&um_tab=$matches[1]&lang='.$add_lang_code,
+									'top'
+				);
+				
 
 				flush_rewrite_rules( true );
 
@@ -104,7 +133,7 @@ class UM_Rewrite {
 
 			}
 			
-			if ( um_get_option('permalink_base') == 'name' ) {
+			if ( in_array( um_get_option('permalink_base'), array('name','name_dash','name_dot','name_plus') ) ) {
 				$user_id = $ultimatemember->user->user_exists_by_name( um_queried_user() );
 
 			}
