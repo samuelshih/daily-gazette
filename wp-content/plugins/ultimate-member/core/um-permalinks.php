@@ -12,7 +12,34 @@ class UM_Permalinks {
 
 		add_action('init',  array(&$this, 'activate_account_via_email_link'), 1);
 
+		remove_action( 'wp_head', 'rel_canonical' );
+		add_action('wp_head',  array(&$this, 'um_rel_canonical_'), 9 );
+
 		$this->current_url = $this->get_current_url();
+
+	}
+
+	/***
+	***	@SEO canonical href bugfix
+	***/
+	function um_rel_canonical_() {
+		if ( !is_singular() )
+			return;
+
+		global $ultimatemember, $wp_the_query;
+		if ( !$id = $wp_the_query->get_queried_object_id() )
+			return;
+
+		if( $this->core['user'] == $id ) {
+			$link = $this->get_current_url();
+			echo "<link rel='canonical' href='$link' />\n";
+			return;
+		}
+
+		$link = get_permalink( $id );
+		if ( $page = get_query_var('cpage') )
+			$link = get_comments_pagenum_link( $page );
+		echo "<link rel='canonical' href='$link' />\n";
 
 	}
 
@@ -33,7 +60,9 @@ class UM_Permalinks {
 	function get_current_url( $no_query_params = false ) {
 		global $post;
 
-		$server_name_method = ( um_get_option('current_url_method') ) ? um_get_option('current_url_method') : 'SERVER_NAME';
+			$um_get_option = get_option('um_options');
+			$server_name_method = ( $um_get_option['current_url_method'] ) ? $um_get_option['current_url_method'] : 'SERVER_NAME';
+			$um_port_forwarding_url = ( isset( $um_get_option['um_port_forwarding_url'] ) ) ? $um_get_option['um_port_forwarding_url']: '';
 
 		if ( !isset( $_SERVER['SERVER_NAME'] ) )
 			return '';
@@ -52,16 +81,19 @@ class UM_Permalinks {
 			}
 			$page_url .= "://";
 
-			if ( isset( $_SERVER["SERVER_PORT"] ) && $_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443" ) {
+			if ( $um_port_forwarding_url == 1 && isset( $_SERVER["SERVER_PORT"] ) ) {
 				$page_url .= $_SERVER[ $server_name_method ].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+
 			} else {
 				$page_url .= $_SERVER[ $server_name_method ].$_SERVER["REQUEST_URI"];
 			}
+
 		}
 
 		if ( $no_query_params == true ) {
 			$page_url = strtok($page_url, '?');
 		}
+
 
 		return apply_filters( 'um_get_current_page_url', $page_url );
 	}
@@ -72,7 +104,7 @@ class UM_Permalinks {
 	function activate_account_via_email_link(){
 		global $ultimatemember;
 
-		if ( isset($_REQUEST['act']) && $_REQUEST['act'] == 'activate_via_email' && isset($_REQUEST['hash']) && strlen($_REQUEST['hash']) == 40 &&
+		if ( isset($_REQUEST['act']) && $_REQUEST['act'] == 'activate_via_email' && isset($_REQUEST['hash']) && is_string($_REQUEST['hash']) && strlen($_REQUEST['hash']) == 40 &&
 			isset($_REQUEST['user_id']) && is_numeric($_REQUEST['user_id']) ) { // valid token
 
 				$user_id = absint( $_REQUEST['user_id'] );
@@ -80,12 +112,26 @@ class UM_Permalinks {
 
 				um_fetch_user( $user_id );
 
-				if ( um_user('account_status') != 'awaiting_email_confirmation' ) wp_die('The activation link you used is invalid or has expired.');
-
-				if (  strtolower($_REQUEST['hash']) !== strtolower( um_user('account_secret_hash') )  ) wp_die('The secret key provided does not match this one for the user.');
+				if (  strtolower($_REQUEST['hash']) !== strtolower( um_user('account_secret_hash') )  )
+					wp_die( __( 'This activation link is expired or have already been used.','ultimatemember' ) );
 
 				$ultimatemember->user->approve();
 				$redirect = ( um_user('url_email_activate') ) ? um_user('url_email_activate') : um_get_core_page('login', 'account_active');
+				$login    = (bool) um_user('login_email_activate');
+
+				// log in automatically
+				if ( !is_user_logged_in() && $login ) {
+					$user = get_userdata($user_id);
+					$user_id = $user->ID;
+
+					// update wp user
+					wp_set_current_user( $user_id, $user_login );
+					wp_set_auth_cookie( $user_id );
+
+					ob_start();
+					do_action( 'wp_login', $user_login );
+					ob_end_clean();
+				}
 
 				um_reset_user();
 
@@ -151,6 +197,24 @@ class UM_Permalinks {
 			}
 		}
 
+		// WPML compatibility
+		if ( function_exists('icl_object_id') ) {
+
+
+			$language_code = ICL_LANGUAGE_CODE;
+			$lang_post_id = icl_object_id( $page_id , 'page', true, $language_code );
+
+			 if($lang_post_id != 0) {
+		        $profile_url = get_permalink( $lang_post_id );
+		    }else {
+		        // No page found, it's most likely the homepage
+		        global $sitepress;
+		        $profile_url = $sitepress->language_url( $language );
+		    }
+
+
+		}
+
 		if ( um_get_option('permalink_base') == 'user_login' ) {
 			$user_in_url = um_user('user_login');
 
@@ -173,7 +237,15 @@ class UM_Permalinks {
 		}
 
 		if ( um_get_option('permalink_base') == 'name' ) {
-			$user_in_url = rawurlencode( strtolower( um_user('full_name') ) );
+			$user_in_url = rawurlencode( strtolower( str_replace(" ",".",um_user('full_name') ) ) );
+		}
+
+		if ( um_get_option('permalink_base') == 'name_dash' ) {
+			$user_in_url = rawurlencode( strtolower( str_replace(" ","-",um_user('full_name') ) ) );
+		}
+
+		if ( um_get_option('permalink_base') == 'name_plus' ) {
+			$user_in_url = strtolower( str_replace(" ","+",um_user('full_name') ) );
 		}
 
 		if ( get_option('permalink_structure') ) {

@@ -76,6 +76,9 @@ class UM_Members {
 
 		if ( $ultimatemember->builtin->is_dropdown_field( $filter, $attrs ) ) {
 			$type = 'select';
+		} else if ( 'user_tags' == $attrs['type'] ) {
+			$attrs['options'] = apply_filters('um_multiselect_options_user_tags', array(), $attrs);
+			$type = 'select';
 		} else {
 			$type = 'text';
 		}
@@ -118,7 +121,7 @@ class UM_Members {
 
 				?>
 
-				<input type="text" name="<?php echo $filter; ?>" id="<?php echo $filter; ?>" placeholder="<?php echo $attrs['label']; ?>" value="<?php um_queried_search_value( $filter ); ?>" />
+				<input type="text" name="<?php echo $filter; ?>" id="<?php echo $filter; ?>" placeholder="<?php echo isset( $attrs['label'] ) ? $attrs['label'] : ''; ?>" value="<?php um_queried_search_value( $filter ); ?>" />
 
 				<?php
 

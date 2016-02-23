@@ -110,7 +110,9 @@ $this->sections[] = array(
 				'desc'			=> 'e.g. ' . trailingslashit( um_get_core_page('user') ) .'<strong>username</strong>/',
 				'options' 		=> array(
 									'user_login' 		=> __('Username','ultimatemember'),
-									'name' 				=> __('First and Last Name','ultimatemember'),
+									'name' 				=> __('First and Last Name with \'.\'','ultimatemember'),
+									'name_dash' 		=> __('First and Last Name with \'-\'','ultimatemember'),
+									'name_plus' 		=> __('First and Last Name with \'+\'','ultimatemember'),
 									'user_id' 			=> __('User ID','ultimatemember'),
 				),
 				'placeholder' 	=> __('Select...','ultimatemember')
@@ -268,6 +270,16 @@ $this->sections[] = array(
                 'title'   		=> __( 'Allow users to change e-mail','ultimatemember' ),
 				'default' 		=> 1,
 				'desc' 	   		=> __('Whether to allow users changing their email in account page.','ultimatemember'),
+				'on'			=> __('On','ultimatemember'),
+				'off'			=> __('Off','ultimatemember'),
+        ),
+
+        array(
+                'id'       		=> 'account_hide_in_directory',
+                'type'     		=> 'switch',
+                'title'   		=> __( 'Allow users to hide their profiles from directory','ultimatemember' ),
+				'default' 		=> 1,
+				'desc' 	   		=> __('Whether to allow users changing their profile visibility from member directory in account page.','ultimatemember'),
 				'on'			=> __('On','ultimatemember'),
 				'off'			=> __('Off','ultimatemember'),
         ),
@@ -1877,11 +1889,13 @@ $this->sections[] = array(
         ),
 
         array(
-                'id'      		=> 'advanced_denied_roles',
-                'type'     		=> 'text',
-                'title'    		=> __( 'Do not allow registering these roles','ultimatemember' ),
-                'default'  		=> '',
-				'desc' 	   		=> __('Comma seperate roles (role slugs) that can not be registered from frontend ever for security.','ultimatemember'),
+                'id'      		=> 'um_port_forwarding_url',
+                'type'     		=> 'switch',
+                'title'    		=> __( 'Allow Port forwarding in URL','ultimatemember' ),
+                'default'  		=> 0,
+				'desc' 	   		=> __('Turn on If you want to include port number in URLs','ultimatemember'),
+				'on'			=> __('On','ultimatemember'),
+				'off'			=> __('Off','ultimatemember'),
         ),
 
         array(
