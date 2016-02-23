@@ -478,7 +478,7 @@ body {
 	background-color: #FFFFFF;
 }
 #header-text-nav-wrap {
-	padding: 0px 0 25px;
+	padding: 0px 0 1px; /* Edit made by Keton on 2/23/16*/
 	/*padding: 20px 0 25px;*/
 }
 #header-left-section {
