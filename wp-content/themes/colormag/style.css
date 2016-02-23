@@ -101,7 +101,7 @@ input,
 select,
 textarea {
 	color: #444444;
-	font: 16px 'Open Sans', serif;
+	font: 16px 'Georgia', serif;
 	line-height: 1.6;
 	word-wrap: break-word;
 }
@@ -113,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
 	padding-bottom: 18px;
 	color: #333333;
 	font-weight: normal;
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Georgia', sans-serif;
 }
 h1 { font-size: 42px; line-height: 1.2; }
 h2 { font-size: 38px; line-height: 1.2; }
@@ -134,7 +134,7 @@ hr {
 p {
 	line-height: 1.6;
 	margin-bottom: 15px;
-	font-family: 'Open Sans', serif;
+	font-family: 'Georgia', serif;
 	font-size: 15px;
 }
 strong {
@@ -222,7 +222,7 @@ blockquote {
 }
 blockquote p {
 	font-size: 20px;
-	font-family: 'Open Sans', serif;
+	font-family: 'Georgia', serif;
 	line-height: 1.4;
 	position: relative;
 	padding-top: 13px;
@@ -508,7 +508,7 @@ body {
 	font-size: 16px;
 	color: #666666;
 	padding-bottom: 0px;
-	font-family: 'Open Sans', serif;
+	font-family: 'Georgia', serif;
 }
 #header-right-section {
 	float: right;
@@ -700,7 +700,7 @@ nav li > ol {
 .main-navigation li {
 	float: left;
 	position: relative;
-	font-family: 'Open Sans', serif;
+	font-family: 'Georgia', serif;
 	font-weight: 300;
 }
 .main-navigation a {
@@ -836,7 +836,7 @@ li.default-menu {
 	color: #ffffff;
 	margin: 0;
 	text-align: center;
-	font-family: 'Open Sans', serif;
+	Georgia: 'Georgia', serif;
    padding-bottom: 0;
 }
 .site-header .menu-toggle:hover {
