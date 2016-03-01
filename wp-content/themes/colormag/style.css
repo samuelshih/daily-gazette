@@ -494,6 +494,8 @@ body {
 #header-text {
 	float: left;
 	padding-right: 20px;
+	font-family: 'Impact', sans-serif;
+	font-weight: bold;
 }
 #site-title {
 	padding-bottom: 0;
