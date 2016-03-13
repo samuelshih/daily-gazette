@@ -102,7 +102,7 @@ while ($query->have_posts()) {
 		<tr>
 			<td colspan="3"><h1 style="text-align: center; margin:0;">
             <a href="http://daily.swarthmore.edu">
-               <img width="720px" src="<?php echo SendoutBuilder::get_static_content('email_header.jpg');?>"
+               <img width="720px" src="<?php echo SendoutBuilder::get_static_content('email_header_sxsw.jpg');?>"
                  alt="THE DAILY GAZETTE" style="display:block"/>
             </a>
 			</h1></td>
