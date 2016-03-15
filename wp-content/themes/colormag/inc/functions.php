@@ -184,24 +184,6 @@ function colormag_sidebar_select() {
 }
 endif;
 
-/**
- * Outputs the co-authors display names, with links to their posts.
- * Co-Authors Plus equivalent of the_author_posts_link() template tag.
- *
- * @param string $between Delimiter that should appear between the co-authors
- * @param string $betweenLast Delimiter that should appear between the last two co-authors
- * @param string $before What should appear before the presentation of co-authors
- * @param string $after What should appear after the presentation of co-authors
- * @param bool $echo Whether the co-authors should be echoed or returned. Defaults to true.
- */
-function coauthors_posts_links( $between = null, $betweenLast = null, $before = null, $after = null, $echo = true ){
-    return coauthors__echo('coauthors_posts_links_single', 'callback', array(
-        'between' => $between,
-        'betweenLast' => $betweenLast,
-        'before' => $before,
-        'after' => $after
-    ), null, $echo );
-}
 /****************************************************************************************/
 if ( ! function_exists( 'colormag_entry_meta' ) ) :
 /**
