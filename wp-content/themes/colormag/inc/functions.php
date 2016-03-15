@@ -183,7 +183,10 @@ function colormag_sidebar_select() {
 	elseif( $layout_meta == 'left_sidebar' ) { get_sidebar( 'left' ); }
 }
 endif;
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 2d3f43e... testing coauthors
 /****************************************************************************************/
 if ( ! function_exists( 'colormag_entry_meta' ) ) :
 /**
