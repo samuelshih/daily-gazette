@@ -116,7 +116,7 @@ while ($query->have_posts()) {
 		<!--	<br/><i>Play 2048: 20Chopp Edition <a href="http://games.usvsth3m.com/2048/20chopp-edition-2/" style="color:#555;text-decoration:underline">here</a>!</i>-->
 <br/><i><a href="http://wsrnfm.org/schedule/" style="color:#555;text-decoration:underline">WSRN Weekly Schedule</a></i>
 
-The deadline to register to vote in the PA primary is MONDAY, MARCH 28! To register, use this <a href="https://www.pavoterservices.state.pa.us/Pages/VoterRegistrationApplication.aspx">online application.</a> To find out more information about voter registration, check out <a href="http://www.votespa.com/portal/server.pt?open=514&objID=1174117&parentname=ObjMgr&parentid=1&mode=2">votesPA.com</a>
+<br/> <strong>The deadline to register to vote in the PA primary is MONDAY, MARCH 28! To register, use this <a href="https://www.pavoterservices.state.pa.us/Pages/VoterRegistrationApplication.aspx">online application.</a> To find out more information about voter registration, check out <a href="http://www.votespa.com/portal/server.pt?open=514&objID=1174117&parentname=ObjMgr&parentid=1&mode=2">votesPA.com</a></strong>
 
 			</p>
 			</td>
