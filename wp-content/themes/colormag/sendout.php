@@ -112,10 +112,11 @@ while ($query->have_posts()) {
 			<td colspan="3">
 			<p style="box-shadow: 1px 1px 20px #F5F5F5;font-size: 16px; margin: 5px; color: #555; text-align:center; background: #F5F5F5;">
             <i><?php echo $theDate; ?> - Today's Happenings from Swarthmore College's Daily Student Newspaper</i>
-<br/>             <i><a href="http://daily.swarthmore.edu/work-for-us" style="color:#555">Join us!</a></i>
+<br/>             <i><a href="http://daily.swarthmore.edu/work-for-the-daily-gazette/" style="color:#555">Join the staff!</a></i>
 		<!--	<br/><i>Play 2048: 20Chopp Edition <a href="http://games.usvsth3m.com/2048/20chopp-edition-2/" style="color:#555;text-decoration:underline">here</a>!</i>-->
-<br/><i><a href="http://daily.swarthmore.edu/wsrn-weekly-schedule/" style="color:#555;text-decoration:underline">WSRN Weekly Schedule</a></i>
+<br/><i><a href="http://wsrnfm.org/schedule/" style="color:#555;text-decoration:underline">WSRN Weekly Schedule</a></i>
 
+The deadline to register to vote in the PA primary is MONDAY, MARCH 28! To register, use this <a href="https://www.pavoterservices.state.pa.us/Pages/VoterRegistrationApplication.aspx">online application.</a> To find out more information about voter registration, check out <a href="http://www.votespa.com/portal/server.pt?open=514&objID=1174117&parentname=ObjMgr&parentid=1&mode=2">votesPA.com</a>
 
 			</p>
 			</td>
@@ -273,7 +274,7 @@ foreach($slogitems as $slogHeadline){ ?>
 
 <!-- FOOTER AND FINE PRINT -->
 <div style="border-top: black 1px solid;margin-top:50px;padding-top:20px;font-size:12px;"><p style="margin-top:0;"><i>The Daily Gazette</i> is a publication written by members of the Swarthmore College community. The administration of Swarthmore College has no editorial control or oversight regarding the content or presentation of <i>The Daily Gazette</i>. Funding for <i>The Gazette</i> is provided by the Student Budget Committee and by advertising revenue.</p><p style="margin-top:0;">To unsubscribe or otherwise change your subscription preferences,
-<a style="color:black;text-decoration:underline;" href="https://secure.sccs.swarthmore.edu/mailman/listinfo/dailygazette">manage your account</a>.
+<a style="color:black;text-decoration:underline;" href="https://secure.sccs.swarthmore.edu/mailman/listinfo/thedailygazette">manage your account</a>.
 </p></div>
 </body>
 </html>
