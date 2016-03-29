@@ -110,7 +110,7 @@ while ($query->have_posts()) {
 		<tr height="4px"><td colspan="3" style="background: #000; height:4px;"></td></tr>
 		<tr height="1px">
 			<td colspan="3">
-			<strong>The deadline to register to vote in the PA primary is MONDAY, MARCH 28! To register, use this <a href="https://www.pavoterservices.state.pa.us/Pages/VoterRegistrationApplication.aspx" target="_blank">online application.</a> To find out more information about voter registration, check out <a href="http://www.votespa.com/portal/server.pt?open=514&objID=1174117&parentname=ObjMgr&parentid=1&mode=2" target="_blank">votesPA.com</a></strong>
+			<!-- <strong>The deadline to register to vote in the PA primary is MONDAY, MARCH 28! To register, use this <a href="https://www.pavoterservices.state.pa.us/Pages/VoterRegistrationApplication.aspx" target="_blank">online application.</a> To find out more information about voter registration, check out <a href="http://www.votespa.com/portal/server.pt?open=514&objID=1174117&parentname=ObjMgr&parentid=1&mode=2" target="_blank">votesPA.com</a></strong> -->
 <br/>
 			<p style="box-shadow: 1px 1px 20px #F5F5F5;font-size: 16px; margin: 5px; color: #555; text-align:center; background: #F5F5F5;">
             <i><?php echo $theDate; ?> - Today's Happenings from Swarthmore College's Daily Student Newspaper</i>
